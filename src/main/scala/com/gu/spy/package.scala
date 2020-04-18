@@ -5,19 +5,22 @@ package object spy {
     def spy: String = {
       val builder = new StringBuilder
 
-      def loop(obj: Any, depth: Int, paramName: Option[String]): Unit = {
+      def loop(value: Any, depth: Int, name: Option[String]): Unit = {
         val indent = "  " * depth
-        val prettyName = paramName.fold("")(x => s"$x: ")
-        val ptype = obj match { case _: Iterable[Any] => "" case obj: Product => obj.productPrefix case _ => obj.toString }
+        val row = value match {
+          case seq: Iterable[_] => name.fold("")(x => s"$x: ") + (if (seq.nonEmpty) "Iterable" else "Nil")  // name: Iterable
+          case obj: Product     => name.fold("")(x => s"$x: ") + obj.productPrefix                          // nane: ProductType
+          case _                => name.fold("")(x => s"$x = ") + value.toString                            // name = Value
+        }
 
-        builder append s"$indent$prettyName$ptype\n"
+        builder append s"$indent$row\n"
 
-        obj match {
+        value match {
           case seq: Iterable[Any] =>
             seq.foreach(loop(_, depth + 1, None))
           case obj: Product =>
-            (obj.productIterator zip obj.productElementNames)
-              .foreach { case (subObj, paramName) => loop(subObj, depth + 1, Some(paramName)) }
+            (obj.productElementNames zip obj.productIterator)
+              .foreach { case (name, value) => loop(value, depth + 1, Some(name)) }
           case _ =>
         }
       }
