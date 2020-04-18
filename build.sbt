@@ -23,6 +23,7 @@ lazy val root = (project in file("."))
       releaseStepCommand("sonatypeReleaseAll"),
       pushChanges
     ),
+    testFrameworks += new TestFramework("munit.Framework"),
     libraryDependencies += "org.scalameta" %% "munit" % "0.7.2" % Test,
   )
 
