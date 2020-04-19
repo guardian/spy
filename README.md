@@ -1,15 +1,20 @@
-# spy
-
+# spy [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.gu/spy_2.13/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.gu/spy_2.13)
 Library for Scala 2.13+ projects for pretty printing case classes with 
 field names in hierarchical tree format. Useful for debugging purposes as it
 gives human readable representation of case classes. Provides `.spy` extension
 method for any object.
 
+
+
+## User guide
+
+Works only with Scala 2.13+
+
 ```
-libraryDependencies += "com.gu" %% "spy" % "0.1.1"
+libraryDependencies += "com.gu" %% "spy" % "x.x.x"
 ```
 
-Example usage
+Example
 
 ```scala
 import com.gu.spy._
@@ -19,14 +24,7 @@ val user = User("Jean-Luc Picard", 79, Address("Starfleet", "San Francisco", "Ea
 println(user.spy)
 ```
 
-
-#### `println(user)`
-
-```
-User(Jean-Luc Picard,79,Address(Starfleet,San Francisco,Earth,United Federation of Planets))
-```
-
-#### `println(user.spy)`
+where `println(user.spy`) outputs
 
 ```
 User
@@ -37,6 +35,12 @@ User
     city: San Francisco
     planet: Earth
     country: United Federation of Planets
+```
+
+as opposed to usual `println(user)` output
+
+```
+User(Jean-Luc Picard,79,Address(Starfleet,San Francisco,Earth,United Federation of Planets))
 ```
 
 ## Credits
