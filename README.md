@@ -1,12 +1,12 @@
 # spy
 
 Library for Scala 2.13+ projects for pretty printing case classes with 
-field names and in hierarchical tree format. Useful for debugging purposes as it
+field names in hierarchical tree format. Useful for debugging purposes as it
 gives human readable representation of case classes. Provides `.spy` extension
 method for any object.
 
 ```
-libraryDependencies += "com.gu" %% "spy" % "0.1.0"
+libraryDependencies += "com.gu" %% "spy" % "0.1.1"
 ```
 
 Example usage
